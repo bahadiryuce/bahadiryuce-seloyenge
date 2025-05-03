@@ -67,7 +67,15 @@
 </head>
 <body>
 
-  <div id="intro">
+  <div id="intro"><audio id="bg-music" loop>
+  <source src="https://example.com/music.mp3" type="audio/mpeg">
+  Tarayıcınız ses dosyasını desteklemiyor.
+</audio>
+
+<button onclick="document.getElementById('bg-music').play()" style="margin-top: 1rem; padding: 10px 20px; font-size: 1rem; border: none; border-radius: 10px; background-color: #ff77aa; color: white; cursor: pointer;">
+  🎶 Müziği Başlat
+</button>
+
     <h1>Selenaaa!</h1>
   </div>
 
@@ -90,3 +98,9 @@
 
 </body>
 </html>
+<div class="gallery">
+  <img src="https://placekitten.com/300/200" alt="Selina 1">
+  <img src="https://placekitten.com/301/200" alt="Selina 2">
+  <img src="https://placekitten.com/302/200" alt="Selina 3">
+</div>
+
