@@ -2,6 +2,62 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
+  <title>Doğum Günü Sürprizi</title>
+</head>
+<body>
+
+  <h1>İyi ki Doğdun!</h1>
+
+  <!-- 🎵 Müzik: Başlangıçta otomatik çalmasın, kullanıcı başlatsın -->
+  <audio id="backgroundMusic" src="muzik.mp3" loop></audio>
+  <button onclick="startMusic()">Müziği Başlat</button>
+  <button onclick="stopMusic()">Müziği Durdur</button>
+
+  <br><br>
+
+  <!-- 🎥 Video: Oynatılınca müzik duracak -->
+  <video id="birthdayVideo" width="640" height="360" controls>
+    <source src="video.mp4" type="video/mp4">
+    Tarayıcınız video oynatmayı desteklemiyor.
+  </video>
+
+  <!-- 📜 JavaScript Kısmı -->
+  <script>
+    const music = document.getElementById("backgroundMusic");
+    const video = document.getElementById("birthdayVideo");
+
+    function startMusic() {
+      music.play();
+    }
+
+    function stopMusic() {
+      music.pause();
+    }
+
+    // Video oynayınca müzik duracak
+    video.addEventListener("play", () => {
+      if (!music.paused) {
+        music.pause();
+      }
+    });
+
+    // Video durursa müzik tekrar başlayabilir (isteğe bağlı)
+    video.addEventListener("pause", () => {
+      music.play();
+    });
+
+    // Video bitince müzik tekrar çalsın mı?
+    video.addEventListener("ended", () => {
+      music.play();
+    });
+  </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title> Seloyenge - Özel Doğum Günü Sitesi 🎉</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap">
