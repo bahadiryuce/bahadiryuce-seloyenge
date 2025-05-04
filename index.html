@@ -84,6 +84,26 @@
       padding: 6px 12px;
       font-size: 12px;
     }
+
+    #left-photo {
+      position: fixed;
+      top: 50%;
+      left: 10px;
+      transform: translateY(-50%);
+      width: 150px;
+      height: auto;
+      z-index: 10;
+    }
+
+    #right-photo {
+      position: fixed;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      width: 150px;
+      height: auto;
+      z-index: 10;
+    }
   </style>
 </head>
 <body>
@@ -114,9 +134,11 @@
     <source src="music.mp3" type="audio/mpeg">
   </audio>
 
+  <img src="left.jpg" id="left-photo" alt="Sol Fotoğraf" />
+  <img src="right.jpg" id="right-photo" alt="Sağ Fotoğraf" />
+
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script>
-    // Konfeti efekti
     setTimeout(() => {
       confetti({
         particleCount: 150,
@@ -130,7 +152,6 @@
     const musicToggle = document.getElementById('music-toggle');
     let isPlaying = false;
 
-    // Butona tıklanırsa müziği başlat/durdur
     musicToggle.addEventListener('click', () => {
       if (isPlaying) {
         music.pause();
@@ -144,7 +165,6 @@
       isPlaying = !isPlaying;
     });
 
-    // Video oynarken müzik dursun
     video.addEventListener("play", () => {
       if (!music.paused) {
         music.pause();
@@ -153,7 +173,6 @@
       }
     });
 
-    // Video durunca müzik tekrar başlasın
     video.addEventListener("pause", () => {
       music.play();
       musicToggle.textContent = '🔇 Müziği Durdur';
