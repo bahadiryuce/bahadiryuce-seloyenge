@@ -129,14 +129,14 @@
 
 </body>
   <button id="music-toggle" style="position: fixed; top: 10px; right: 10px; z-index: 9999; padding: 6px 12px; font-size: 12px;">
-    Müziği Başlat
+   🎵Müziği Başlat
 </button>
 <audio id="bg-music" loop>
   <source src="senin-muzik-dosyan.mp3" type="audio/mpeg">
 </audio>
 
 <button id="music-toggle" style="position: fixed; top: 10px; right: 10px; z-index: 9999; padding: 6px 12px; font-size: 12px;">
-  Müziği Başlat
+ 🎵 Müziği Başlat
 </button>
 
 <script>
@@ -144,23 +144,27 @@
   const musicToggle = document.getElementById('music-toggle');
   let isPlaying = false;
 
+  // Butona tıklanınca çalış
   musicToggle.addEventListener('click', () => {
     if (isPlaying) {
       music.pause();
-      musicToggle.textContent = 'Müziği Başlat';
+      musicToggle.textContent = '🎵 Müziği Başlat';
     } else {
-      music.play();
-      musicToggle.textContent = 'Müziği Durdur';
+      music.play().catch(e => {
+        alert("Tarayıcı müziği engelledi, lütfen sayfaya tekrar tıklayıp tekrar deneyin.");
+      });
+      musicToggle.textContent = '🔇 Müziği Durdur';
     }
     isPlaying = !isPlaying;
   });
 
-  const video = document.querySelector('video');
+  // Video oynarken müzik dursun
+  const video = document.getElementById("birthdayVideo");
   if (video) {
-    video.addEventListener('play', () => {
-      if (!video.paused) {
+    video.addEventListener("play", () => {
+      if (!music.paused) {
         music.pause();
-        musicToggle.textContent = 'Müziği Başlat';
+        musicToggle.textContent = '🎵 Müziği Başlat';
         isPlaying = false;
       }
     });
