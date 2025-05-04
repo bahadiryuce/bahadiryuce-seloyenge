@@ -75,6 +75,15 @@
       color: white;
       cursor: pointer;
     }
+
+    #music-toggle {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      z-index: 9999;
+      padding: 6px 12px;
+      font-size: 12px;
+    }
   </style>
 </head>
 <body>
@@ -93,14 +102,21 @@
     <img src="https://placekitten.com/301/200" alt="Selina 2">
     <img src="https://placekitten.com/302/200" alt="Selina 3">
   </div>
-  
+
   <video id="birthdayVideo" width="640" height="360" controls>
     <source src="video.mp4" type="video/mp4">
     Tarayıcınız video oynatmayı desteklemiyor.
   </video>
 
+  <button id="music-toggle">🎵 Müziği Başlat</button>
+
+  <audio id="bg-music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script>
+    // Konfeti efekti
     setTimeout(() => {
       confetti({
         particleCount: 150,
@@ -109,54 +125,26 @@
       });
     }, 3000);
 
-    const music = document.getElementById("bg-music");
+    const music = document.getElementById('bg-music');
     const video = document.getElementById("birthdayVideo");
+    const musicToggle = document.getElementById('music-toggle');
+    let isPlaying = false;
 
-    video.addEventListener("play", () => {
-      if (!music.paused) {
+    // Butona tıklanırsa müziği başlat/durdur
+    musicToggle.addEventListener('click', () => {
+      if (isPlaying) {
         music.pause();
+        musicToggle.textContent = '🎵 Müziği Başlat';
+      } else {
+        music.play().catch(e => {
+          alert("Tarayıcı müziği engelledi, lütfen sayfaya tıklayıp tekrar deneyin.");
+        });
+        musicToggle.textContent = '🔇 Müziği Durdur';
       }
+      isPlaying = !isPlaying;
     });
 
-    video.addEventListener("pause", () => {
-      music.play();
-    });
-
-    video.addEventListener("ended", () => {
-      music.play();
-    });
-  </script>
-
-</body>
-  <button id="music-toggle" style="position: fixed; top: 10px; right: 10px; z-index: 9999; padding: 6px 12px; font-size: 12px;">
-   🎵Müziği Başlat
-</button>
-<audio id="bg-music" loop>
-  <source src="music.mp3" type="audio/mpeg">
-</audio>
-
-<script>
-  const music = document.getElementById('bg-music');
-  const musicToggle = document.getElementById('music-toggle');
-  let isPlaying = false;
-
-  // Butona tıklanınca çalış
-  musicToggle.addEventListener('click', () => {
-    if (isPlaying) {
-      music.pause();
-      musicToggle.textContent = '🎵 Müziği Başlat';
-    } else {
-      music.play().catch(e => {
-        alert("Tarayıcı müziği engelledi, lütfen sayfaya tekrar tıklayıp tekrar deneyin.");
-      });
-      musicToggle.textContent = '🔇 Müziği Durdur';
-    }
-    isPlaying = !isPlaying;
-  });
-
-  // Video oynarken müzik dursun
-  const video = document.getElementById("birthdayVideo");
-  if (video) {
+    // Video oynarken müzik dursun
     video.addEventListener("play", () => {
       if (!music.paused) {
         music.pause();
@@ -164,6 +152,20 @@
         isPlaying = false;
       }
     });
-  }
-</script>
+
+    // Video durunca müzik tekrar başlasın
+    video.addEventListener("pause", () => {
+      music.play();
+      musicToggle.textContent = '🔇 Müziği Durdur';
+      isPlaying = true;
+    });
+
+    video.addEventListener("ended", () => {
+      music.play();
+      musicToggle.textContent = '🔇 Müziği Durdur';
+      isPlaying = true;
+    });
+  </script>
+
+</body>
 </html>
