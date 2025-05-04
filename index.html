@@ -80,10 +80,7 @@
 <body>
 
   <div id="intro">
-    <h1>Selenaaa!</h1>
-    <audio id="bg-music" src="muzik.mp3" loop></audio>
-    <button class="button-style" onclick="document.getElementById('bg-music').play()">🎶 Müziği Başlat</button>
-    <button class="button-style" onclick="document.getElementById('bg-music').pause()">🛑 Müziği Durdur</button>
+    <h1>Selamm umarım beğenirsin knk</h1>
   </div>
 
   <div style="padding: 20px; max-width: 600px; margin: auto; background-color: rgba(255,255,255,0.8); border-radius: 15px; box-shadow: 0 0 10px rgba(0,0,0,0.2); margin-top: 20px;">
@@ -138,4 +135,39 @@
   </script>
 
 </body>
+  <button id="music-toggle" style="position: fixed; top: 10px; right: 10px; z-index: 9999; padding: 6px 12px; font-size: 12px;">
+    Müziği Başlat
+</button>
+<audio id="background-music" loop>
+    <source src="senin-muzik-dosyan.mp3" type="audio/mpeg">
+</audio>
+<script>
+  const music = document.getElementById('background-music');
+  const musicToggle = document.getElementById('music-toggle');
+  let isPlaying = false;
+
+  musicToggle.addEventListener('click', () => {
+    if (isPlaying) {
+      music.pause();
+      musicToggle.textContent = 'Müziği Başlat';
+    } else {
+      music.play();
+      musicToggle.textContent = 'Müziği Durdur';
+    }
+    isPlaying = !isPlaying;
+  });
+
+  // Eğer video varsa müziği durdursun
+  const video = document.querySelector('video');
+  if (video) {
+    video.addEventListener('play', () => {
+      if (!video.paused) {
+        music.pause();
+        musicToggle.textContent = 'Müziği Başlat';
+        isPlaying = false;
+      }
+    });
+  }
+</script>
+
 </html>
