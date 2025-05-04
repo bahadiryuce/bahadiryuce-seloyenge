@@ -93,7 +93,7 @@
     <img src="https://placekitten.com/301/200" alt="Selina 2">
     <img src="https://placekitten.com/302/200" alt="Selina 3">
   </div>
-
+  
   <video id="birthdayVideo" width="640" height="360" controls>
     <source src="video.mp4" type="video/mp4">
     Tarayıcınız video oynatmayı desteklemiyor.
@@ -131,7 +131,7 @@
   <button id="music-toggle" style="position: fixed; top: 10px; right: 10px; z-index: 9999; padding: 6px 12px; font-size: 12px;">
     Müziği Başlat
 </button>
-<audio id="background-music" loop>
+<audio id="bg-music" loop>
   <source src="senin-muzik-dosyan.mp3" type="audio/mpeg">
 </audio>
 
@@ -140,7 +140,7 @@
 </button>
 
 <script>
-  const music = document.getElementById('background-music');
+  const music = document.getElementById('bg-music');
   const musicToggle = document.getElementById('music-toggle');
   let isPlaying = false;
 
