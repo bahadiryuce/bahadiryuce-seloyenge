@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
@@ -10,11 +9,14 @@
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Comic Neue', cursive;
+      font-family: 'Comic Neue', 'Arial', sans-serif;
       background: #fffaf4;
       color: #333;
       text-align: center;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
     }
 
     #intro {
@@ -147,6 +149,14 @@
 
       h2 {
         font-size: 1.5em;
+        padding: 0 1rem;
+        word-break: break-word;
+      }
+
+      p {
+        padding: 0 1rem;
+        font-size: 0.95em;
+        word-break: break-word;
       }
 
       .gallery img {
@@ -235,31 +245,11 @@
         musicToggle.textContent = '🎵 Müziği Başlat';
       } else {
         music.play().catch(e => {
-          alert("Tarayıcı müziği engelledi, lütfen sayfaya tıklayıp tekrar deneyin.");
+          alert("Müzik oynatılamıyor.");
         });
-        musicToggle.textContent = '🔇 Müziği Durdur';
+        musicToggle.textContent = '⏸ Müziği Durdur';
       }
       isPlaying = !isPlaying;
-    });
-
-    video.addEventListener("play", () => {
-      if (!music.paused) {
-        music.pause();
-        musicToggle.textContent = '🎵 Müziği Başlat';
-        isPlaying = false;
-      }
-    });
-
-    video.addEventListener("pause", () => {
-      music.play();
-      musicToggle.textContent = '🔇 Müziği Durdur';
-      isPlaying = true;
-    });
-
-    video.addEventListener("ended", () => {
-      music.play();
-      musicToggle.textContent = '🔇 Müziği Durdur';
-      isPlaying = true;
     });
   </script>
 
